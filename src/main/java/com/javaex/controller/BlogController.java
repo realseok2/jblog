@@ -31,6 +31,13 @@ public class BlogController {
 		return "/blog/blog-main";
 	}
 	
+	//내블로그 관리
+	@RequestMapping("/{id}/admin/basic")
+	public String basic() {
+		System.out.println("BlogController : basic");
+		
+		return "/blog/admin/blog-admin-basic";
+	}
 	// 기본설정-------------------------------------------------------------------
 	
 	
