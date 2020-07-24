@@ -3,4 +3,22 @@
 
 <mapper namespace="blog">
 
+	<!--============================ 메인화면 ============================-->
+	<!-- 블로그 정보 가져오기 -->
+	<select id="getBlogInfo" parameterType="String" resultType="com.javaex.vo.BlogVo">
+		<![CDATA[
+			select  b.id,
+			        u.userName,
+			        b.blogTitle,
+			        b.logoFile
+			from	blog b, users u
+			where	b.id = u.id
+			and		b.id = #{id}
+		]]>
+	</select>
+
+
+
+
+	
 </mapper>

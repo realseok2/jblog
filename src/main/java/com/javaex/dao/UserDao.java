@@ -19,6 +19,7 @@ public class UserDao {
 	public int insert(UserVo userVo) {
 		System.out.println("UserDao : insert");
 
+		System.out.println("userDao-----" + userVo.toString());
 		return sqlSession.insert("user.insert", userVo);
 	}
 
@@ -40,8 +41,13 @@ public class UserDao {
 		return sqlSession.selectOne("user.selectUser", userVo);
 	}
 	
+	// 로그인한 사용자 정보 가져오기-----------------------------------------------------	
 	
-	
+	public UserVo getUser(int no) {
+		System.out.println("로그인한 사용자 정보 가져오기 : UserDao-getUser");
+		
+		return sqlSession.selectOne("user.getUser", no);
+	}
 	
 	
 	

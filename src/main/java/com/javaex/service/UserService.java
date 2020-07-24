@@ -41,12 +41,17 @@ public class UserService {
 	
 	public UserVo login(UserVo userVo) {
 		System.out.println("UserService : login");
-		
+		System.out.println("userService------" + userVo.toString());
 		return userDao.selectUser(userVo);
 	}
 	
+	//	로그인한 사용자 정보 가져오기-----------------------------------------------------	
 	
-	
+	public UserVo getUser(int no) {
+		System.out.println("로그인한 유저 정보 가져오기 : UserService-getUser");
+		
+		return userDao.getUser(no);
+	}
 	
 	
 	

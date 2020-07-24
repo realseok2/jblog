@@ -18,9 +18,18 @@
 		 		<c:otherwise>		
 					<!-- 로그인 후 메뉴 -->
 					<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
-					<li><a href="${pageContext.request.contextPath}/blog/${id}">내블로그</a></li>
+					<li><a href="javascript:void(window.open('${pageContext.request.contextPath}/${authUser.id}', '_blank'))">내블로그</a></li>
  				</c:otherwise>
  				
  			</c:choose>
  			
  		</ul>
+ 		
+ 		<%-- 
+ 		
+ 		${pageContext.request.contextPath}/${authUser.id}
+ 		
+ 		javascript:void(window.open('주소', '_blank'))		
+ 		javascript:void(window.open('주소', '이름','width=#, height=#'))
+
+ 		 --%>

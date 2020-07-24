@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,8 +46,9 @@ public class UserController {
 	@RequestMapping("/join")
 	public String join(@ModelAttribute UserVo userVo) {
 		System.out.println("UserController : join");
-
+		System.out.println("유저컨트롤러 전------" + userVo.toString());		
 		userService.join(userVo);
+		System.out.println("유저컨트롤러 후------" + userVo.toString());
 		return "redirect:/user/joinSuccess";
 	}
 
@@ -54,7 +56,6 @@ public class UserController {
 	@RequestMapping("/joinSuccess")
 	public String joinSuccess() {
 		System.out.println("UserController : joinSuccess");
-
 		return "/user/joinSuccess";
 	}
 	
@@ -80,6 +81,7 @@ public class UserController {
 		if(authUser != null) {
 			System.out.println("로그인 성공");
 			session.setAttribute("authUser", authUser);
+			System.out.println("로그인성공 : " + authUser.toString());
 			return "redirect:/";
 			
 		//로그인 실패시
@@ -88,6 +90,29 @@ public class UserController {
 			return "redirect:/user/loginForm?result=fail";
 		}
 	}
+	
+	//	로그인한 사용자 정보 가져오기
+	@RequestMapping("/getUser")
+	public String getUser(Model model, HttpSession session) {
+		System.out.println("UserController : getUser");
+		
+		int no = ((UserVo)session.getAttribute("authUser")).getUserNo();
+		
+		UserVo authUser = userService.getUser(no);
+		model.addAttribute("authUser", authUser);
+		return "redirect:/";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// 로그아웃-------------------------------------------------------------------
 	@RequestMapping("logout")
