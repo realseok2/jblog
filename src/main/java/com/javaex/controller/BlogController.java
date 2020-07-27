@@ -15,64 +15,21 @@ public class BlogController {
 	// 기본설정-------------------------------------------------------------------
 	@Autowired
 	private BlogService blogService;
-	
+
 	// 메인화면-------------------------------------------------------------------
 
-	//아이디 입력시 해당 사용자의 개인 블로그로 이동, 정보 가져오기
+	// 아이디 입력시 해당 사용자의 개인 블로그로 이동, 정보 가져오기
 	@RequestMapping("{id}")
 	public String blogMain(@PathVariable("id") String id, Model model) {
-		System.out.println("BlogController : blogMain" + ", " + id);
-		
+		System.out.println("BlogController : blogMain");
+		System.out.println("BlogController : " + id);
+
 		model.addAttribute(id);
-		
+
 		BlogVo blogVo = blogService.getBlogInfo(id);
 		model.addAttribute("blogVo", blogVo);
-		
+
 		return "/blog/blog-main";
 	}
-	
-	//내블로그 관리
-	@RequestMapping("/{id}/admin/basic")
-	public String basic() {
-		System.out.println("BlogController : basic");
-		
-		return "/blog/admin/blog-admin-basic";
-	}
-	// 기본설정-------------------------------------------------------------------
-	
-	
-	
-	
-	// 기본설정-------------------------------------------------------------------
-	
-	
-	
-	
-	// 기본설정-------------------------------------------------------------------
-	
-	
-	// 기본설정-------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

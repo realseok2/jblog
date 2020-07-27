@@ -3,7 +3,7 @@
 
 <mapper namespace="blog">
 
-	<!--============================ 메인화면 ============================-->
+	<!--============================ 메인화면 ============================ -->
 	<!-- 블로그 정보 가져오기 -->
 	<select id="getBlogInfo" parameterType="String" resultType="com.javaex.vo.BlogVo">
 		<![CDATA[
@@ -12,13 +12,45 @@
 			        b.blogTitle,
 			        b.logoFile
 			from	blog b, users u
-			where	b.id = u.id
-			and		b.id = #{id}
+			where	b.id		= u.id
+			and		b.id		= #{id}
+		]]>
+	</select>
+
+	<!-- 블로그 기본 설정 셋팅 -->
+	<insert id="blogInsert" parameterType="com.javaex.vo.BlogVo">
+		<![CDATA[
+			insert into		blog
+			values			(#{id},
+							#{blogTitle},
+							#{logoFile}
+			)
+		]]>
+	</insert>
+	
+	<!-- 기본설정 수정 -->
+	<update id="update" parameterType="com.javaex.vo.BlogVo">
+		<![CDATA[
+			update	blog
+			set		blogTitle	= #{blogTitle},
+					logoFile	= #{logoFile}
+			where	id			= #{id}
+		]]>
+	</update>
+	
+	<!-- 이미지 디폴트 값 설정 -->
+	<select id="blogInfo" parameterType="String" resultType="com.javaex.vo.BlogVo">
+		<![CDATA[
+			select	id,
+					blogTitle,
+					logoFile
+			from	blog
+			where	id			= #{id}
 		]]>
 	</select>
 
 
 
 
-	
+
 </mapper>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaex.dao.UserDao;
+import com.javaex.vo.BlogVo;
 import com.javaex.vo.UserVo;
 
 @Service
@@ -17,8 +18,13 @@ public class UserService {
 
 	public int join(UserVo userVo) {
 		System.out.println("UserService : join");
-
-		return userDao.insert(userVo);
+		
+		BlogVo blogVo = new BlogVo();
+		blogVo.setId(userVo.getId());
+		blogVo.setBlogTitle(userVo.getUserName() + "의 블로그입니다.");
+		blogVo.setLogoFile("default");
+		
+		int blog = blogAdminDao.blogInsert(blogVo);
 	}
 
 	// id중복체크(ajax)-----------------------------------------------------------
@@ -41,7 +47,7 @@ public class UserService {
 	
 	public UserVo login(UserVo userVo) {
 		System.out.println("UserService : login");
-		System.out.println("userService------" + userVo.toString());
+		
 		return userDao.selectUser(userVo);
 	}
 	

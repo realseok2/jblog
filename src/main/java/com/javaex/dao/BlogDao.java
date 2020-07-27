@@ -13,27 +13,13 @@ public class BlogDao {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	// 메인화면-------------------------------------------------------------------
 
-	//아이디 입력시 해당 사용자의 개인 블로그로 이동, 정보 가져오기
+	// 아이디 입력시 해당 사용자의 개인 블로그로 이동, 정보 가져오기
 	public BlogVo getBlogInfo(String id) {
-		System.out.println("BlogDao : getBlogInfo");
-		System.out.println("다오 : " + id);
+		System.out.println("BlogDao : getBlogInfo, " + id);
 		return sqlSession.selectOne("blog.getBlogInfo", id);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

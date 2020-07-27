@@ -5,9 +5,13 @@
 
 	<!-- 회원가입 -->
 	<insert id="insert" parameterType="com.javaex.vo.UserVo">
+
+		<selectKey keyProperty="userNo" resultType="int" order="BEFORE">	
+			select seq_users_no.nextval from dual
+		</selectKey>
 		<![CDATA[
 			insert into		users
-			values			(seq_users_no.nextval,
+			values			(#{userNo},
 							#{id},
 							#{userName},
 							#{password},

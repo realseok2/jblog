@@ -46,16 +46,18 @@ public class UserController {
 	@RequestMapping("/join")
 	public String join(@ModelAttribute UserVo userVo) {
 		System.out.println("UserController : join");
-		System.out.println("유저컨트롤러 전------" + userVo.toString());		
-		userService.join(userVo);
-		System.out.println("유저컨트롤러 후------" + userVo.toString());
-		return "redirect:/user/joinSuccess";
+		
+		if(userService.join(userVo) == 1)
+			return "/user/joinSuccess";
+		else
+			return "redirect:/user/joinForm";
 	}
 
 	// 회원가입성공
 	@RequestMapping("/joinSuccess")
 	public String joinSuccess() {
 		System.out.println("UserController : joinSuccess");
+		
 		return "/user/joinSuccess";
 	}
 	
