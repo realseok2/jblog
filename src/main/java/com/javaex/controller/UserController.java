@@ -46,8 +46,8 @@ public class UserController {
 	@RequestMapping("/join")
 	public String join(@ModelAttribute UserVo userVo) {
 		System.out.println("UserController : join");
-		
-		if(userService.join(userVo) == 1)
+
+		if (userService.join(userVo) == 1)
 			return "/user/joinSuccess";
 		else
 			return "redirect:/user/joinForm";
@@ -57,11 +57,10 @@ public class UserController {
 	@RequestMapping("/joinSuccess")
 	public String joinSuccess() {
 		System.out.println("UserController : joinSuccess");
-		
+
 		return "/user/joinSuccess";
 	}
-	
-	
+
 	// 로그인-------------------------------------------------------------------
 
 	// 로그인폼
@@ -71,80 +70,49 @@ public class UserController {
 
 		return "/user/loginForm";
 	}
-	
-	//	로그인
+
+	// 로그인
 	@RequestMapping("/login")
 	public String login(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("UserController : login");
-		
+
 		UserVo authUser = userService.login(userVo);
-		
-		//로그인 성공시
-		if(authUser != null) {
+
+		// 로그인 성공시
+		if (authUser != null) {
 			System.out.println("로그인 성공");
 			session.setAttribute("authUser", authUser);
 			System.out.println("로그인성공 : " + authUser.toString());
 			return "redirect:/";
-			
-		//로그인 실패시
+
+			// 로그인 실패시
 		} else {
 			System.out.println("로그인 실패");
 			return "redirect:/user/loginForm?result=fail";
 		}
 	}
-	
-	//	로그인한 사용자 정보 가져오기
+
+	// 로그인한 사용자 정보 가져오기
 	@RequestMapping("/getUser")
 	public String getUser(Model model, HttpSession session) {
 		System.out.println("UserController : getUser");
-		
-		int no = ((UserVo)session.getAttribute("authUser")).getUserNo();
-		
+
+		int no = ((UserVo) session.getAttribute("authUser")).getUserNo();
+
 		UserVo authUser = userService.getUser(no);
 		model.addAttribute("authUser", authUser);
 		return "redirect:/";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	// 로그아웃-------------------------------------------------------------------
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		System.out.println("UserController : logout");
-		
+
 		session.removeAttribute("authUser");
 		session.invalidate();
-		
+
 		return "redirect:/";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
 
 }

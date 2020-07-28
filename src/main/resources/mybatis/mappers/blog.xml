@@ -27,7 +27,7 @@
 			)
 		]]>
 	</insert>
-	
+
 	<!-- 기본설정 수정 -->
 	<update id="update" parameterType="com.javaex.vo.BlogVo">
 		<![CDATA[
@@ -37,7 +37,7 @@
 			where	id			= #{id}
 		]]>
 	</update>
-	
+
 	<!-- 이미지 디폴트 값 설정 -->
 	<select id="blogInfo" parameterType="String" resultType="com.javaex.vo.BlogVo">
 		<![CDATA[
@@ -48,9 +48,5 @@
 			where	id			= #{id}
 		]]>
 	</select>
-
-
-
-
 
 </mapper>
